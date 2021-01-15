@@ -1,1 +1,49 @@
 notes and stuff to keep track of
+
+Proposed formula:
+
+	payment = (i*PV)/(1-(1+i)^-n)
+
+		PV = present value of loan (loan amount)
+		i = period interest rate expressed as a decimal
+		n = number of loan payments
+		
+	payments toward interest = P*(i/12)
+	
+		P = principal remaining
+		i = period interest rate expressed as a decimal
+		
+	payment toward principal = PAY - IP
+	
+		PAY = total payment amount
+		IP  = payment towards interest
+
+
+Key data to collect and return:
+	- Customer's Name
+	- Name of mortgage type
+	- Mortgage Amount
+	- Downpayment amount/%
+	- interest rate
+	- Duration (open field)
+	- Additional Payments per Month/year
+		- Show amount of interest saved
+		- Show shortening in length of loan
+		
+Data to be created and returned:
+	- Ammortization Table
+	- Payment Amount
+		- Interest Amount
+		- Principal Amount
+		- Remaining Principal
+		
+		
+Proposed Structure:
+	Mortgage object:
+		- length of loan/remaining
+		- Name of customer
+		- Balance (initial/current)
+		- down payment
+			detect if entered as a percent or dollar number (nobody has a down payment of $100 or less, right?)
+			store and calculate either the percentage of dollar amount based on what is not entered
+		- Interest Rate

@@ -3,4 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="amount_of_original_loan">Amount of Original Loan</string>
+    <string name="term_of_loan_months">Term of Loan (months)</string>
+    <string name="interest_rate">Interest Rate</string>
+    <string name="calculate_amortization_table">Calculate Amortization Table</string>
+    <string name="down_payment">Down Payment</string>
+    <string name="extra_monthly_payments">Extra Monthly Payments?</string>
+    <string name="amount_of_extra_payments">Amount Of Extra Payments</string>
 </resources>

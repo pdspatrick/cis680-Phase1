@@ -50,3 +50,8 @@ Proposed Structure:
 			detect if entered as a percent or dollar number (nobody has a down payment of $100 or less, right?)
 			store and calculate either the percentage of dollar amount based on what is not entered
 		- Interest Rate
+
+7:48 PM 1/25/2021 - 3 ish hour sprint
+
+Implemented the amortization calculation code, which I believe is supposed to be the most difficult part of this?
+Also implemented the first test, which would make sure that the caclulated values don't change anymore.

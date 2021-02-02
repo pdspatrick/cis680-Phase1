@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel=stylesheet href="main.css"/>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"> 
+    <meta charset="UTF-8">
+    <title>Mortgage Calculator</title>
+</head>
+<body>
+<script src="MortgageCalculator.js"></script>
+<div id="root">
+    <div id='form'>
+    <h1>Mortgage Amortization Calculator</h1>
+
+    <form name="dataForm" id="dataForm">
+        <table>
+            <tr><td colspam="2"><label for="initBal">Amount of Loan:</label></td><td colspan="2" style="text-align: right"><input type="text" name="initBal"></tr>
+            <tr><td><label for=term>Term of Loan:</label></td><td><input type="text" name="term" size="5" ></td><td><label for=term>Interest Rate:</label></td><td><input type="text" name="term" size="5"></td></tr>
+            <tr><td colspan="3">Extra Payment Amount:</td><td><input type="text" name="extraPay" size="5" value="0" style="text-align: right"></td></tr>
+            
+            <!-- end of table -->
+            <tr><td colspan="4" style="text-align: center"><input type="button" value="Caclulate" onclick=MortgageCalculator.dataSubmission></td></tr></table>
+        
+</form></div>
+    
+    <div id="results"><h2>Results</h2>
+    </div>
+    </div>
+</body>
+</html>

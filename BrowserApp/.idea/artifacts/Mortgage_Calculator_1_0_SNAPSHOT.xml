@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Mortgage-Calculator-1.0-SNAPSHOT">
+    <output-path>D:\GitHub\cis680-Phase1\BrowserApp\build\libs</output-path>
+    <root id="archive" name="Mortgage-Calculator-1.0-SNAPSHOT.jar">
+      <element id="module-output" name="Mortgage-Calculator.main" />
+    </root>
+  </artifact>
+</component>

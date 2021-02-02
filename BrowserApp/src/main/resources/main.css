@@ -1,0 +1,47 @@
+#root{
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#dataForm{
+    text-align: left;
+}
+
+h1{
+    align-content: center;
+    align-self: center;
+    text-align: center;
+
+}
+
+h2{
+    align-content: center;
+    align-self: center;
+    text-align: center;
+
+}
+
+#form {
+    float: left;
+    background-color: #5588dd;
+    display: block;
+    align-content: center;
+    text-align: left;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    width: 45%;
+    height: inherit;
+}
+
+#results{
+    float: right;
+    text-align: center;
+    background-color: aquamarine;
+    display: block;
+    padding-right: 2.5%;
+    padding-left: 2.5%;
+    padding-top: 50px;
+    width: 45%;
+    height: inherit;
+}

@@ -129,21 +129,27 @@ fun AmmortTable(length: Int, initbal: Float, interestrate: Float, extrapayment: 
     var currentbal = initbal
     table.add(0, mutableListOf())
     table[0].add(0, 0.toFloat())
-    table[0].add(1, 0.toFloat())
-    table[0].add(2, 0.toFloat())
-    table[0].add(3, 0.toFloat())
-    table[0].add(4, 0.toFloat())
+
+
     var periodicinterest = ((interestrate/12)/100)
     var payment = ((initbal * periodicinterest) / (1 - (1 / (1 + periodicinterest).pow(length)))).toFloat()
-    if (extrapayenabled) payment += extrapayment
+    table[0].add(1, payment) // storing payment for later comparison
+    table[0].add(2, 0.toFloat()) // total of interest payments
+    table[0].add(3, 0.toFloat()) // counting principal payments
+    table[0].add(4, 0.toFloat()) // to store the extra payment amount later.
+    if (extrapayenabled) {
+        payment += extrapayment
+        table[0][4] = extrapayment //storing extra payment for later compare. best way to do this and maintain the list size
+    }
     var balanceWillBeZero: Boolean = false // used to flag when balance will be zero for the case of extra payments shortening the timeline of repayments
+
     for (i in kotlin.ranges.IntRange(1,length)){
         var interestPayment = (currentbal * (periodicinterest)).toFloat()
         var principalPayment = (payment - interestPayment)
         if (extrapayenabled){
             if (principalPayment >= currentbal){
                 principalPayment = currentbal
-                balanceWillBeZero = true
+                balanceWillBeZero = true //to know to end the loop and return the table
             }
         }
         currentbal -= principalPayment
@@ -152,10 +158,12 @@ fun AmmortTable(length: Int, initbal: Float, interestrate: Float, extrapayment: 
         listyBoi.add(1, payment.roundToTwoDecimalPlace())
         listyBoi.add(2, interestPayment.roundToTwoDecimalPlace())
         listyBoi.add(3, principalPayment.roundToTwoDecimalPlace())
-        listyBoi.add(4, currentbal.toFloat().roundToTwoDecimalPlace())
+        listyBoi.add(4, currentbal.roundToTwoDecimalPlace())
         table.add(i,listyBoi)
+        table[0][0] = i.toFloat() // count number of payments, useful for comparison later
         table[0][2] += interestPayment//Table[0] is where overall calculations will live, for comparisons sake
         table[0][3] += principalPayment //Storing the calculation of principal payments for validation, if need be
+
         if (balanceWillBeZero){
             return table
         }

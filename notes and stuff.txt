@@ -59,3 +59,8 @@ Also implemented the first test, which would make sure that the caclulated value
 10:14 PM 1/25/2021 - 3 more hours
 
 pretty much all of the calculation code is working now. just needing to link it to UI which is a bit more frustrating that I thought it would be. Lost a little bit on confidence, particularly with how awful it is to shuffle data back and forth from Kotlin to....whatever the UI elements are done with. Going to call it good for tonight and sleep on it.
+
+
+11:56 PM 2/1/2021 - 6 more hours
+
+Pivoted all of the code to KotlinJS - still figuring out how to call the functions I need via JS - I may just rewrite it in JavaScript for web. Got most of the site layout figured out, its not pretty yet though.

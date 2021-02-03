@@ -10,12 +10,62 @@ import java.util.InputMismatchException
 fun main() {
     var data = getDataFromUser()
     var extrapayenabled = false
-    if (data[4] != 0.0f){
-        extrapayenabled = true
-    }
+    if (data[4] != 0.0f) extrapayenabled = true
     var ammorttable1 = AmmortTable(data[1].toInt(), data[0], data[2], data[3], data[4], extrapayenabled)
     var formattedtable1 = toPrintableList(ammorttable1)
     print(formattedtable1)
+    println("")
+    println("")
+    print("Would you like to compare to another mortgage? Y/N")
+    var continuecompare: Boolean = getInputYesNo("compare to other mortgage")
+    if (!continuecompare) return
+    if (continuecompare){
+        var compareOutput: String = ""
+        var data2 = getDataFromUser()
+        extrapayenabled = false
+        if (data2[4] != 0.0f) extrapayenabled = true
+        var ammorttable2 = AmmortTable(data2[1].toInt(), data2[0], data2[2], data2[3], data2[4], extrapayenabled)
+        var formattedtable2 = toPrintableList(ammorttable2)
+        print(formattedtable2)
+        var termDifference: Int = 0
+        var shorterLoan: String = ""
+        var interestDifference: Float = 0.0f
+        var cheaperLoan: String = ""
+        var cheaperString: String = ""
+        var shorterString: String = ""
+        if (ammorttable1[0][0] < ammorttable2[0][0]) {
+            termDifference = (ammorttable2[0][0].toInt() - ammorttable1[0][0].toInt())
+            shorterString += ("The first mortgage is " + termDifference.toString() + " shorter.")
+            shorterLoan = "first"
+        }
+        if (ammorttable1[0][0] > ammorttable2[0][0]) {
+            termDifference = (ammorttable1[0][0].toInt() - ammorttable2[0][0].toInt())
+            shorterString += ("The second mortgage is " + termDifference.toString() + " shorter.")
+            shorterLoan = "second"
+        }
+        if (ammorttable1[0][0] > ammorttable2[0][0]) {
+            termDifference = 0
+            shorterString += "Both mortgages are of the same length."
+            shorterLoan = "same"
+        }
+        if (ammorttable1[0][2] < ammorttable2[0][2]) {
+            interestDifference = (ammorttable2[0][2] - ammorttable1[0][2]).roundToTwoDecimalPlace()
+            cheaperString += ("The first mortgage is " + interestDifference.roundToTwoDecimalPlace().toString() + " cheaper in interest.")
+            cheaperLoan = "first"
+        }
+        if (ammorttable1[0][2] > ammorttable2[0][2]) {
+            interestDifference = (ammorttable1[0][2] - ammorttable2[0][2]).roundToTwoDecimalPlace()
+            cheaperString += ("The second mortgage is " + interestDifference.roundToTwoDecimalPlace().toString() + " cheaper in interest.")
+            cheaperLoan = "second"
+        }
+        if (ammorttable1[0][2] == ammorttable2[0][2]) {
+            interestDifference = 0.0f
+            cheaperString += ("Both mortgages are of the interest cost.")
+            cheaperLoan = "same"
+        }
+
+    }
+
 }
 
 fun getDataFromUser(): List<Float>{
@@ -246,4 +296,19 @@ fun getInputFloatOrZero(fieldname: String): Float{
         }
     }
     return input
+}
+
+fun getInputYesNo(fieldname: String): Boolean{ // used to validate if an answer is yes or no, and returns as boolean
+    var input: Boolean
+    var keys: String = readLine().toString()
+    if ((keys[0].toString() == "y") or (keys[0].toString() == "Y") or (keys[0].toString() == "t") or (keys[0].toString() == "T")){ //check for yes or true
+        return true
+    }
+    if ((keys[0].toString() == "y") or (keys[0].toString() == "Y") or (keys[0].toString() == "t") or (keys[0].toString() == "T")) { //check for no or false
+        return false
+    }
+    else { //call function again if it doesnt match above
+        println("          Invalid input for " + fieldname + ".   Please answer Y/N:")
+        return getInputYesNo(fieldname)
+    }
 }

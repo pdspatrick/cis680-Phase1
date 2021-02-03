@@ -73,3 +73,7 @@ Another pivot. Java console app, since I am running low on time. I have all the 
 3:43 PM 2/3/2021 - 2 hours
 
 Regaining confidence. Console looks good, comparisn functions completed. Just trying to figure out a good way to render the tables on console. Probably not going to render side by side, unless i find something neat and useful to do it with.
+
+5:46 PM 2/3/2021 - 2 hours
+
+Pretty much finished it. Table layout is good. Just need some test harness stuff and some hardening against user input errors.

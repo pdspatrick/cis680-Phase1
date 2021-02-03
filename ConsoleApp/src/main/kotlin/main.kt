@@ -3,7 +3,6 @@ import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
 import kotlin.math.pow
-import java.util.InputMismatchException
 
 
 @JvmOverloads
@@ -12,8 +11,7 @@ fun main() {
     var extrapayenabled = false
     if (data[4] != 0.0f) extrapayenabled = true
     var ammorttable1 = AmmortTable(data[1].toInt(), data[0], data[2], data[3], data[4], extrapayenabled)
-    var formattedtable1 = toPrintableList(ammorttable1)
-    print(formattedtable1)
+    toPrintableList(ammorttable1)
     println("")
     println("")
     print("Would you like to compare to another mortgage? Y/N")
@@ -25,8 +23,7 @@ fun main() {
         extrapayenabled = false
         if (data2[4] != 0.0f) extrapayenabled = true
         var ammorttable2 = AmmortTable(data2[1].toInt(), data2[0], data2[2], data2[3], data2[4], extrapayenabled)
-        var formattedtable2 = toPrintableList(ammorttable2)
-        print(formattedtable2)
+        toPrintableList(ammorttable2)
         var termDifference: Int = 0
         var shorterLoan: String = ""
         var interestDifference: Float = 0.0f
@@ -35,34 +32,37 @@ fun main() {
         var shorterString: String = ""
         if (ammorttable1[0][0] < ammorttable2[0][0]) {
             termDifference = (ammorttable2[0][0].toInt() - ammorttable1[0][0].toInt())
-            shorterString += ("The first mortgage is " + termDifference.toString() + " shorter.")
+            shorterString += ("The first mortgage is " + termDifference.toString() + " months shorter.")
             shorterLoan = "first"
         }
         if (ammorttable1[0][0] > ammorttable2[0][0]) {
             termDifference = (ammorttable1[0][0].toInt() - ammorttable2[0][0].toInt())
-            shorterString += ("The second mortgage is " + termDifference.toString() + " shorter.")
+            shorterString += ("The second mortgage is " + termDifference.toString() + " months shorter.")
             shorterLoan = "second"
         }
-        if (ammorttable1[0][0] > ammorttable2[0][0]) {
+        if (ammorttable1[0][0] == ammorttable2[0][0]) {
             termDifference = 0
             shorterString += "Both mortgages are of the same length."
             shorterLoan = "same"
         }
         if (ammorttable1[0][2] < ammorttable2[0][2]) {
             interestDifference = (ammorttable2[0][2] - ammorttable1[0][2]).roundToTwoDecimalPlace()
-            cheaperString += ("The first mortgage is " + interestDifference.roundToTwoDecimalPlace().toString() + " cheaper in interest.")
+            cheaperString += ("The first mortgage is $" + interestDifference.roundToTwoDecimalPlace().toString() + " cheaper in interest.")
             cheaperLoan = "first"
         }
         if (ammorttable1[0][2] > ammorttable2[0][2]) {
             interestDifference = (ammorttable1[0][2] - ammorttable2[0][2]).roundToTwoDecimalPlace()
-            cheaperString += ("The second mortgage is " + interestDifference.roundToTwoDecimalPlace().toString() + " cheaper in interest.")
+            cheaperString += ("The second mortgage is $" + interestDifference.roundToTwoDecimalPlace().toString() + " cheaper in interest.")
             cheaperLoan = "second"
         }
         if (ammorttable1[0][2] == ammorttable2[0][2]) {
             interestDifference = 0.0f
-            cheaperString += ("Both mortgages are of the interest cost.")
+            cheaperString += ("Both mortgages are of the same interest cost.")
             cheaperLoan = "same"
         }
+
+        println(shorterString)
+        println(cheaperString)
 
     }
 
@@ -84,24 +84,39 @@ fun getDataFromUser(): List<Float>{
 
 }
 
-fun toPrintableList(table: MutableList<MutableList<Float>>): List<List<String>> {
+fun toPrintableList(table: MutableList<MutableList<Float>>){
     var table2: MutableList<List<String>> = mutableListOf()
+    var tablehas6: Boolean = false
     if (table[1].size == 6){
-        table2.add(0, listOf<String>("Payment #", "Principal Payment", "Interest Payment", "Extra Payment", "Total Payment"))
-        for (i in IntRange(1, table.size-1))
-        {
-            table2.add(i, listOf<String>(table[i][0].roundToTwoDecimalPlace().toString(), table[i][3].roundToTwoDecimalPlace().toString(), table[i][2].roundToTwoDecimalPlace().toString(), table[i][5].roundToTwoDecimalPlace().toString(), table[i][1].roundToTwoDecimalPlace().toString()))
-        }}
-    else
-    {
-        table2.add(0, listOf("Payment #", "Principal Payment", "Interest Payment", "Total Payment"))
-        for (i in IntRange(1,table.size-1))
-                {
-                    table2.add(i, listOf<String>(table[i][0].toInt().toString(), 325.toString(), table[i][3].roundToTwoDecimalPlace().toString(), table[i][2].roundToTwoDecimalPlace().toString(), table[i][1].roundToTwoDecimalPlace().toString()))
-                }
+        tablehas6 = true
     }
-
-            return table2
+    if (table[1].size != 6){
+        tablehas6 = false
+    }
+    println("")
+    if (!tablehas6) {
+        val leftAlignFormat = "| %-9s | %-17s |  %-15s | %-13s |%n"
+        val divider: String = "+-----------+-------------------+------------------+---------------+%n"
+        System.out.format("+-----------+-------------------+------------------+---------------+%n")
+        System.out.format("| Payment # | Principal Payment | Interest Payment | Total Payment |%n")
+        System.out.format("+-----------+-------------------+------------------+---------------+%n")
+        for (i in IntRange(1, table.size-1)) {
+            System.out.format(leftAlignFormat, table[i][0].toInt().toString(), table[i][3].roundToTwoDecimalPlace().toString(), table[i][2].roundToTwoDecimalPlace().toString(), table[i][1].roundToTwoDecimalPlace().toString())
+        }
+        System.out.format("+-----------+-------------------+------------------+---------------+%n")
+    }
+    if (tablehas6) {
+        val leftAlignFormat = "| %-9s | %-17s |  %-15s | %-13s | %-12s |%n"
+        val divider: String = "+-----------+-------------------+------------------+---------------+--------------+%n"
+        System.out.format("+-----------+-------------------+------------------+---------------+--------------+%n")
+        System.out.format("| Payment # | Principal Payment | Interest Payment | Extra Payment |Total Payment |%n")
+        System.out.format("+-----------+-------------------+------------------+---------------+--------------+%n")
+        for (i in IntRange(1, table.size-1)) {
+            System.out.format(leftAlignFormat, table[i][0].toInt().toString(), table[i][3].roundToTwoDecimalPlace().toString(), table[i][2].roundToTwoDecimalPlace().toString(), table[i][5].roundToTwoDecimalPlace().toString(), table[i][1].roundToTwoDecimalPlace().toString())
+        }
+        System.out.format("+-----------+-------------------+------------------+---------------+--------------+%n")
+    }
+    return
 }
 
 
@@ -196,13 +211,12 @@ fun AmmortTable(length: Int, initbal: Float, interestrate: Float, downPayment: F
     if (downPayment != 0.0f){
         initbal -= downPayment // Deduct down payment from loan
     }
-    var payment = ((initbal * periodicinterest) / (1 - (1 / (1 + periodicinterest).pow(length)))).toFloat()
+    var payment = ((initbal * periodicinterest).roundToTwoDecimalPlace() / (1 - (1 / (1 + periodicinterest).pow(length)))).roundToTwoDecimalPlace()
     table[0].add(1, payment) // storing payment for later comparison
     table[0].add(2, 0.toFloat()) // total of interest payments
     table[0].add(3, 0.toFloat()) // counting principal payments
     table[0].add(4, 0.toFloat()) // to store the extra payment amount later.
     if (extrapayenabled) {
-        payment += extrapayment
         table[0][4] = extrapayment //storing extra payment for later compare. best way to do this and maintain the list size
     }
     var balanceWillBeZero: Boolean = false // used to flag when balance will be zero for the case of extra payments shortening the timeline of repayments
@@ -211,16 +225,19 @@ fun AmmortTable(length: Int, initbal: Float, interestrate: Float, downPayment: F
         var interestPayment = (currentbal * (periodicinterest)).toFloat()
         var principalPayment = (payment - interestPayment)
         var listyBoi: MutableList<Float> = mutableListOf() //I hate this but it worked
-        if (extrapayenabled){
-            if (principalPayment >= currentbal){
-                principalPayment = currentbal
-                balanceWillBeZero = true //to know to end the loop and return the table
-            }
+        if (principalPayment >= currentbal){
+            principalPayment = currentbal
+            balanceWillBeZero = true //to know to end the loop and return the table
         }
+
         currentbal -= principalPayment
 
+        if ((!balanceWillBeZero) and (extrapayenabled)){
+                currentbal -= extrapayment
+        }
+
         listyBoi.add(0, i.toFloat().roundToTwoDecimalPlace())
-        listyBoi.add(1, payment.roundToTwoDecimalPlace())
+        listyBoi.add(1, (payment.roundToTwoDecimalPlace()))
         listyBoi.add(2, interestPayment.roundToTwoDecimalPlace())
         listyBoi.add(3, principalPayment.roundToTwoDecimalPlace())
         listyBoi.add(4, currentbal.roundToTwoDecimalPlace())
@@ -234,8 +251,8 @@ fun AmmortTable(length: Int, initbal: Float, interestrate: Float, downPayment: F
         table[0][3] += principalPayment //Storing the calculation of principal payments for validation, if need be
 
         if (balanceWillBeZero){
-            listyBoi[5] = 0.0f.roundToTwoDecimalPlace()
-            return table
+            if (extrapayenabled) listyBoi[5] = 0.0f.roundToTwoDecimalPlace()
+            break
         }
     }
     return table
@@ -304,7 +321,7 @@ fun getInputYesNo(fieldname: String): Boolean{ // used to validate if an answer 
     if ((keys[0].toString() == "y") or (keys[0].toString() == "Y") or (keys[0].toString() == "t") or (keys[0].toString() == "T")){ //check for yes or true
         return true
     }
-    if ((keys[0].toString() == "y") or (keys[0].toString() == "Y") or (keys[0].toString() == "t") or (keys[0].toString() == "T")) { //check for no or false
+    if ((keys[0].toString() == "n") or (keys[0].toString() == "N") or (keys[0].toString() == "f") or (keys[0].toString() == "F")) { //check for no or false
         return false
     }
     else { //call function again if it doesnt match above

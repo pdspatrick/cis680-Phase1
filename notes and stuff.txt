@@ -64,3 +64,8 @@ pretty much all of the calculation code is working now. just needing to link it 
 11:56 PM 2/1/2021 - 6 more hours
 
 Pivoted all of the code to KotlinJS - still figuring out how to call the functions I need via JS - I may just rewrite it in JavaScript for web. Got most of the site layout figured out, its not pretty yet though.
+
+
+10:57 PM 2/2/2021 - 4.5 hours
+
+Another pivot. Java console app, since I am running low on time. I have all the meat of the code done, and error checking and input validation. Just need to do the mortgage comparison function and a printed table output for console that doesn't look like garbage.

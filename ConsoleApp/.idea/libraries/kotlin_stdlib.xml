@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="kotlin-stdlib">
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/Kotlin/lib/kotlin-stdlib.jar!/" />
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/Kotlin/lib/kotlin-scripting-jvm.jar!/" />
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/Kotlin/lib/kotlin-core.jar!/" />
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/Kotlin/lib/kotlin-native.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

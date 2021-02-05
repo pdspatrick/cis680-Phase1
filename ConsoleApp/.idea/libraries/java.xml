@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="java">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://C:/Program Files/OpenJDK/jdk-13.0.2/lib/src.zip!/java.base" />
+    </SOURCES>
+  </library>
+</component>

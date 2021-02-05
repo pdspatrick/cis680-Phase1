@@ -77,3 +77,7 @@ Regaining confidence. Console looks good, comparisn functions completed. Just tr
 5:46 PM 2/3/2021 - 2 hours
 
 Pretty much finished it. Table layout is good. Just need some test harness stuff and some hardening against user input errors.
+
+11:07 PM 2/4/2021 - 3 hours
+
+testing and validation. Hardened agianst user input. Rounding seems to be working reliably, as I am only off by about $.16 (or ~$.80 in saved interest) over 30 years on a $312500 mortgage, comparing to them with or without an extra $1000/month payment. That is good enough for me.

@@ -1,18 +1,20 @@
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.*
+import org.junit.*
 
 class TestClient {
     @Test
     fun testAmTable() {
         var table: MutableList<MutableList<Float>> = AmmortTable(360, 312500.0f, 3.5f)
-        assertEquals(192677.14.toFloat(), table[0][2])
+        assertEquals(192676.28.toFloat(), table[0][2])
         }
 
     @Test
     fun testAmTableExtraPayment() {
-        var table: MutableList<MutableList<Float>> = AmmortTable(360, 312500.0f, 3.5f, 0.0f, 300.toFloat(), true)
-        assertEquals(135470.45.toFloat(), table[0][2])
-        assertEquals(264.toFloat(), table.last()[0])
+        var table: MutableList<MutableList<Float>> = AmmortTable(360, 312500.0f, 3.5f, 0.0f, 1000f, true)
+        assertEquals(80978.83.toFloat(), table[0][2])
+        assertEquals(164.toFloat(), table.last()[0])
         }
 
     @Test

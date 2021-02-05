@@ -22,6 +22,10 @@ tasks.test {
 
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.includeRuntime = true
+    kotlinOptions.noStdlib = false
+    kotlinOptions.noReflect = false
+
 }
 
 application {

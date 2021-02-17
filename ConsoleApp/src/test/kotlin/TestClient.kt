@@ -23,4 +23,8 @@ class TestClient {
         number = number.roundToTwoDecimalPlace()
         assertEquals("3.14".toFloat(), number)
     }
+    @Test
+    fun truthIsIrrelevant() {
+        assertEquals(true, false)
+    }
 }

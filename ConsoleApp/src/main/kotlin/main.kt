@@ -324,6 +324,7 @@ fun getInputFloatOrZero(fieldname: String): Float{
             break
         } catch (e: InputMismatchException) {
             println("          Invalid input for " + fieldname + ".   Please Reenter:  ")
+            return(getInputFloatOrZero(fieldname))
         }
          catch (e: NoSuchElementException) {
             println("          No input for " + fieldname + ".   Assuming 0.")
